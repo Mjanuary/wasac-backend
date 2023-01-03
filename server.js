@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 
+const Routers = require("./routers");
+
 const PORT = process.env.PORT;
 
 // Start server
@@ -18,14 +20,7 @@ app.use(
 );
 app.use(morgan("dev"));
 
-// Routers
-app.get("/users", (req, res) => {
-  return res.send("All users");
-});
-
-app.get("/products", (req, res) => {
-  return res.send("Products");
-});
+app.use(Routers);
 
 // Start the app
 app.listen(PORT, () => {
