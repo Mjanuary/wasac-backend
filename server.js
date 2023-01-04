@@ -18,6 +18,8 @@ app.use(
     extended: false,
   })
 );
+app.use(bodyParser.json());
+
 app.use(morgan("dev"));
 
 app.use(Routers);
