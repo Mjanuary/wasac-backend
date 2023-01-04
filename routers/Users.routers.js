@@ -1,31 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const { getUsers } = require("../models/Users.model");
+const { userTypeFormat } = require("../utils/funcrions");
 
 // Routers
-router.get("/users", (req, res) => {
-  return res.send([
-    {
-      id: 1,
-      name: "Alice",
-    },
-    {
-      id: 2,
-      name: "John",
-    },
-  ]);
-});
+router.get("/:userType", async (req, res) => {
+  const userType = req.param("userType");
 
-router.get("/admins", (req, res) => {
-  return res.send([
-    {
-      id: 1,
-      name: "James",
-    },
-    {
-      id: 2,
-      name: "kevin",
-    },
-  ]);
+  let data = await getUsers(userTypeFormat(userType));
+  return res.send(data.rows);
 });
 
 module.exports = router;
